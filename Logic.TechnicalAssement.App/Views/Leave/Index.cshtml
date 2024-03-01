@@ -1,0 +1,61 @@
+﻿@{
+    ViewData["Title"] = "Leave";
+}
+<div class="container">
+<div class="row text-leave my-4">
+    <h1 class="display-4">Leave</h1>
+    <partial name="_CreateLeaveRequest" />
+</div>
+
+<div id="leaveRequestsPanel" class="row my-4"></div>
+</div>
+@section Scripts {
+<script>
+
+    $(document).ready(function () {
+
+        loadLeaveRequests(); 
+
+        $("#addLeave").on('click', function (evt) {
+            evt.preventDefault();
+
+            //I would add client side validation here
+
+            let formData = $('form').serialize();
+
+            $.ajax({
+                type: "POST",
+                url: '/leave/post',
+                data: formData,
+                headers: { "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val() },
+                success: function () {
+                    alert('Leave request submitted successfully');
+                    loadLeaveRequests();
+                    $('form').trigger("reset");
+                },
+                error: function (request, error) {
+                    console.log(error);
+                    alert("Unable to log the leave request:\n\n " + JSON.stringify(request.responseText));
+                },
+
+            });
+
+            
+        });
+
+        function loadLeaveRequests() {
+            $.get('@Url.Action("LeaveRequests", "Leave")', function (data) {
+                    if (data.length == 0) {
+                    $("#leaveRequestsPanel").html("");
+                    $("#leaveRequestsPanel").hide();
+                    }
+                    else {
+                    $("#leaveRequestsPanel").html(data);
+                    $("#leaveRequestsPanelt").show();
+                    }
+                });
+            }
+        
+    });
+</script>
+}

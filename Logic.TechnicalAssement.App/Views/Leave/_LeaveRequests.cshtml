@@ -1,0 +1,46 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@model List<LeaveViewModel>
+
+<h2>Leave Requests</h2>
+
+@if(Model == null || !Model.Any())
+{
+  <p>No leave requests to show</p>
+}
+else
+{
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Leave Type</th>
+        <th scope="col">Start Date</th>
+        <th scope="col">End Date</th>
+        <th scope="col">Half Day</th>
+      </tr>
+    </thead>
+    <tbody>
+      @foreach (LeaveViewModel item in Model )
+      {
+          <tr>
+              <th scope="row">@item.Id</th>
+              <td>@item.FirstName</td>
+              <td>@item.LastName</td>
+              <td>@item.Email</td>
+              <td>@item.LeaveType</td>
+              <td>@item.StartDate.ToLongDateString()</td>
+              <td>@item.EndDate.ToLongDateString()</td>
+              <td class="text-center"><input asp-for="@item.IsHalfDay" disabled type="checkbox" class="form-check-input" /></td>
+          </tr>
+      }
+        </tbody>
+    </table>
+}
+
+

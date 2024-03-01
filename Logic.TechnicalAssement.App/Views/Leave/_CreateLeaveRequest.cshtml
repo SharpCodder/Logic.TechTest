@@ -1,0 +1,65 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@model LeaveViewModel
+
+<div class="container">
+  <p>Create leave request</p>
+  <form method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group row my-3">
+      <label asp-for="FirstName" class="control-label col-sm-2"></label>
+      <div class="col-sm-10">
+        <input asp-for="FirstName" class="form-control" />
+        <span asp-validation-for="FirstName" class="text-danger" />
+      </div>
+    </div>
+    <div class="form-group row my-3">
+      <label asp-for="LastName" class="control-label col-sm-2"></label>
+      <div class="col-sm-10">
+        <input asp-for="LastName" class="form-control" />
+        <span asp-validation-for="LastName" class="text-danger" />
+      </div>
+    </div>
+    <div class="form-group row my-3">
+      <label asp-for="Email" class="control-label col-sm-2"></label>
+      <div class="col-sm-10">
+        <input asp-for="Email" type="email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger" />
+      </div>
+    </div>
+    <div class="form-group row my-3">
+      <label asp-for="LeaveType" class="control-label col-sm-2"></label>
+      <div class="col-sm-10">
+        <select asp-for="LeaveType" asp-items="Html.GetEnumSelectList<LeaveTypeEnum>()" class="form-control"></select>
+        <span asp-validation-for="LeaveType" class="text-danger" />
+      </div>
+    </div>
+    <div class="form-group row my-3">
+      <label asp-for="StartDate" class="control-label col-sm-2"></label>
+      <div class="col-sm-10">
+        <input asp-for="StartDate" type="date" class="form-control" />
+        <span asp-validation-for="StartDate" class="text-danger" />
+      </div>
+    </div>
+    <div class="form-group row my-3">
+      <label asp-for="EndDate" class="control-label col-sm-2"></label>
+      <div class="col-sm-10">
+        <input asp-for="EndDate" type="date" class="form-control" />
+        <span asp-validation-for="EndDate" class="text-danger" />
+      </div>
+    </div>
+    <div class="form-group row my-3">
+      <label asp-for="IsHalfDay" class="control-label col-sm-2"></label>
+      <div class="col-sm-10">
+        <input asp-for="IsHalfDay" type="checkbox" class="form-check-input" />
+        <span asp-validation-for="IsHalfDay" class="text-danger" />
+      </div>
+    </div>
+
+    <div class="form-group text-center my-3">
+      <input type="submit" value="Submit" id="addLeave" class="btn btn-primary" />
+    </div>
+  </form>
+</div>
